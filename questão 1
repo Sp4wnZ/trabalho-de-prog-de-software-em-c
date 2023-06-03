@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+void printParentPID() {
+printf("PID do pai: %d\n", getpid());
+}
+
+void printChildPID() {
+printf("PID do filho: %d\n", getpid());
+}
+int main(void){
+int i;
+pid_t pid;
+if((pid=fork())<0){
+perror("fork");
+exit(1);
+}
+if(pid==0){
+printChildPID();
+}else{
+    printParentPID();
+}
+printf("Este print será executado por ambos os processos\n\n");
+exit(0);
+}
